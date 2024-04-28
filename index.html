@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:">
+		<meta http-equiv="Access-Control-Allow-Origin" content="*">
+		<link href="style.css" rel="stylesheet">
+		<link href="colors.css" rel="stylesheet">
+		<script src="main.js"></script>
+		<script src="FileSaver.js"></script>
+		<script src="lz4.js"></script>
+		<script src="html2canvas.js"></script>
+		<title>Pattern Maker</title>
+		<link rel="icon" href="favicon.ico">
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="tool add-sub" id="sub-col">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" fill="none" stroke-width="50">
+						<circle cx="480" cy="480" r="400" />
+						<path d="M220 480 L740 480" />
+					</svg>
+				</div>
+				<div class="tool num" id="cols">5</div>
+				<div class="tool add-sub" id="add-col">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" fill="none" stroke-width="50">
+						<circle cx="480" cy="480" r="400" />
+						<path d="M480 220 L480 740" />
+						<path d="M220 480 L740 480" />
+					</svg>
+				</div>
+				<div class="tool">by</div>
+				<div class="tool add-sub" id="sub-row">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" fill="none" stroke-width="50">
+						<circle cx="480" cy="480" r="400" />
+						<path d="M220 480 L740 480" />
+					</svg>
+				</div>
+				<div class="tool num" id="rows">5</div>
+				<div class="tool add-sub" id="add-row">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" fill="none" stroke-width="50">
+						<circle cx="480" cy="480" r="400" />
+						<path d="M480 220 L480 740" />
+						<path d="M220 480 L740 480" />
+					</svg>
+				</div>
+			</div>
+			<div class="row">
+				<div class="tool selectable selected">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" fill="none" stroke-width="50">
+						<circle cx="480" cy="480" r="300" />
+					</svg>
+				</div>
+				<div class="tool selectable">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" fill="none" stroke-width="50">
+						<rect width="560" height="560" x="200" y="200" />
+					</svg>
+				</div>
+				<div class="tool selectable">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" fill="none" stroke-width="50">
+						<path d="M760 760 L480 200 L200 760 Z" />
+					</svg>
+				</div>
+				<div class="tool selectable">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" fill="none" stroke-width="50">
+						<path d="M200 200 L480 760 L760 200 Z" />
+					</svg>
+				</div>
+				<div class="tool selectable">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" fill="none" stroke-width="50">
+						<circle cx="480" cy="480" r="75" />
+					</svg>
+				</div>
+				<div class="tool selectable">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" fill="none" stroke-width="50">
+						<circle cx="310" cy="480" r="75" />
+						<circle cx="650" cy="480" r="75" />
+					</svg>
+				</div>
+				<div class="tool selectable">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" fill="none" stroke-width="50">
+						<circle cx="310" cy="650" r="75" />
+						<circle cx="650" cy="650" r="75" />
+						<circle cx="480" cy="310" r="75" />
+					</svg>
+				</div>
+				<div class="tool selectable">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" fill="none" stroke-width="50">
+						<circle cx="310" cy="310" r="75" />
+						<circle cx="650" cy="650" r="75" />
+						<circle cx="310" cy="650" r="75" />
+						<circle cx="650" cy="310" r="75" />
+					</svg>
+				</div>
+			</div>
+			<div class="row">
+				<div class="tool selectable">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" stroke-width="50">
+						<path d="M0 0 L960 960" />
+						<path d="M960 0 L0 960" />
+					</svg>
+				</div>
+				<div class="tool selectable">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" stroke-width="50">
+						<path d="M0 0 L960 960" />
+						<path d="M480 480 L0 960" />
+					</svg>
+				</div>
+				<div class="tool selectable">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" stroke-width="50">
+						<path d="M960 0 L0 960" />
+						<path d="M480 480 L0 0" />
+					</svg>
+				</div>
+				<div class="tool selectable">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" stroke-width="50">
+						<path d="M0 0 L960 960" />
+						<path d="M480 480 L960 0" />
+					</svg>
+				</div>
+				<div class="tool selectable">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" stroke-width="50">
+						<path d="M960 0 L0 960" />
+						<path d="M480 480 L960 960" />
+					</svg>
+				</div>
+				<div class="tool selectable">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" stroke-width="50">
+						<path d="M0 0 L960 960" />
+					</svg>
+				</div>
+				<div class="tool selectable">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" stroke-width="50">
+						<path d="M960 0 L0 960" />
+					</svg>
+				</div>
+			</div>
+			<div class="row">
+				<div class="tool selectable" id="letter">Letter:<span id="letter-picked"></span></div>
+				<div class="tool selectable" id="color">Color:&nbsp;<span id="color-picked"></span></div>
+				<div class="tool selectable" id="erase">Erase</div>
+				<div class="tool add-sub" id="save">Save</div>
+				<div class="tool add-sub" id="load">Load</div>
+				<div class="tool add-sub" id="export">Export</div>
+			</div>
+		</div>
+		<div class="container" id="grid"></div>
+		<div class="container modal hidden" id="letter-select">
+			<div class="row">
+				<div class="form">
+					Enter a letter:
+					<span class="form-input" id="letter-input">&nbsp;</span>
+					<svg class="form-done" id="letter-done" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor">
+						<path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
+					</svg>
+				</div>
+			</div>
+		</div>
+		<div class="container modal hidden" id="color-select">
+			<div class="row">
+				<div class="form">
+					Select a color:
+					<div class="inline-container color-squares">
+						<div class="row">
+							<div class="square-small" id="color-0"></div>
+							<div class="square-small" id="color-3"></div>
+							<div class="square-small" id="color-6"></div>
+							<div class="square-small" id="color-9"></div>
+							<div class="square-small" id="color-12"></div>
+							<div class="square-small" id="color-15"></div>
+							<div class="square-small" id="color-18"></div>
+							<div class="square-small" id="color-21"></div>
+							<div class="square-small" id="color-24"></div>
+						</div>
+						<div class="row">
+							<div class="square-small" id="color-1"></div>
+							<div class="square-small" id="color-4"></div>
+							<div class="square-small" id="color-7"></div>
+							<div class="square-small" id="color-10"></div>
+							<div class="square-small" id="color-13"></div>
+							<div class="square-small" id="color-16"></div>
+							<div class="square-small" id="color-19"></div>
+							<div class="square-small" id="color-22"></div>
+							<div class="square-small" id="color-25"></div>
+						</div>
+						<div class="row">
+							<div class="square-small" id="color-2"></div>
+							<div class="square-small" id="color-5"></div>
+							<div class="square-small" id="color-8"></div>
+							<div class="square-small" id="color-11"></div>
+							<div class="square-small" id="color-14"></div>
+							<div class="square-small" id="color-17"></div>
+							<div class="square-small" id="color-20"></div>
+							<div class="square-small" id="color-23"></div>
+							<div class="square-small" id="color-26"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
