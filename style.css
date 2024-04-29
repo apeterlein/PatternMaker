@@ -18,14 +18,15 @@
 	--main-fg-color: black;
 	--highlight-bg-color: #99999999;
 	--selected-fg-color: green;
-	--border-thickness: .05em;
-	--square-size: 3em;
+	--border-thickness: .06em;
+	--square-size: 3.5em;
 	--square-small-size: .5em;
 }
 body {
 	background-color: var(--main-bg-color);
 	color: var(--main-fg-color);
 	font-family: "Open Sans";
+	font-size: .7em;
 	font-weight: 200;
 }
 .container {
@@ -50,7 +51,7 @@ body {
 	margin-right: auto;
 }
 .tool {
-	font-size: var(--square-size);
+	font-size: 3em;
 	height: 1em;
 	min-width: 1em;
 	line-height: 1em;
@@ -130,7 +131,7 @@ body {
 	padding-top: 15%;
 }
 .form {
-	font-size: var(--square-size);
+	font-size: 3em;
 	height: 1em;
 	min-width: 1em;
 	line-height: 1em;
@@ -162,6 +163,30 @@ body {
 	line-height: 1em;
 	border-width: var(--border-thickness);
 	border-style: solid;
+}
+.loading {
+	display: flex;
+	justify-content: space-around;
+	width: 20em;
+	margin-top: 5em;
+}
+.dot {
+	background-color: black;
+	height: 2em;
+	width: 2em;
+	border-radius: 50%;
+	animation: bump 1.2s ease infinite alternate-reverse;
+}
+.delay-1 {
+	animation-delay: .4s;
+}
+.delay-2 {
+	animation-delay: .8s;
+}
+@keyframes bump { 
+	100% { 
+		margin-top: 2em;
+	} 
 }
 .hidden {
 	display: none;

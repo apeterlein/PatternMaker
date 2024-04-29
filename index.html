@@ -142,12 +142,36 @@
 				<div class="tool selectable" id="letter">Letter:<span id="letter-picked"></span></div>
 				<div class="tool selectable" id="color">Color:&nbsp;<span id="color-picked"></span></div>
 				<div class="tool selectable" id="erase">Erase</div>
+			</div>
+			<div class="row">
+				<div class="tool add-sub" id="sub-zoom">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" fill="none" stroke-width="50">
+						<circle cx="480" cy="480" r="400" />
+						<path d="M220 480 L740 480" />
+					</svg>
+				</div>
+				<div class="tool num" id="zoom">100%</div>
+				<div class="tool add-sub" id="add-zoom">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" stroke="currentColor" fill="none" stroke-width="50">
+						<circle cx="480" cy="480" r="400" />
+						<path d="M480 220 L480 740" />
+						<path d="M220 480 L740 480" />
+					</svg>
+				</div>
 				<div class="tool add-sub" id="save">Save</div>
 				<div class="tool add-sub" id="load">Load</div>
 				<div class="tool add-sub" id="export">Export</div>
+				<div class="tool add-sub" id="import">Import</div>
 			</div>
 		</div>
-		<div class="container" id="grid"></div>
+		<div class="container" id="loading">
+			<div class="row loading">
+				<div class="dot"></div>
+				<div class="dot delay-1"></div>
+				<div class="dot delay-2"></div>
+			</div>
+		</div>
+		<div class="container hidden" id="grid"></div>
 		<div class="container modal hidden" id="letter-select">
 			<div class="row">
 				<div class="form">
